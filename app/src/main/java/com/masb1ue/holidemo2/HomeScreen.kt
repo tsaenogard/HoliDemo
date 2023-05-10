@@ -1,11 +1,9 @@
 package com.masb1ue.holidemo2
 
-import android.widget.Space
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -19,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -51,11 +48,11 @@ fun HomeScreen(
                 .height(94.dp),
             horizontalArrangement = Arrangement.spacedBy(18.dp)
         ) {
-            items(SampleData.categoryList.size) { index ->
+            items(SampleData.industryList.size) { index ->
                 Column(
                     Modifier
                         .fillMaxHeight()
-                        .clickable { onCategoryClick.invoke(SampleData.categoryList[index]) },
+                        .clickable { onCategoryClick.invoke(SampleData.industryList[index]) },
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
@@ -69,7 +66,7 @@ fun HomeScreen(
                         contentScale = ContentScale.Crop
                     )
                     Text(
-                        text = SampleData.categoryList[index],
+                        text = SampleData.industryList[index],
                         modifier = Modifier.weight(1f)
                     )
                 }

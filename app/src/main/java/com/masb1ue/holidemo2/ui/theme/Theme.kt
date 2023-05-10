@@ -16,24 +16,37 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.ViewCompat
 
 private val DarkColorScheme = darkColorScheme(
-    primary = colorFFFFFF,
+    primary = ColorFFFFFF,
     onPrimary = Color171614,
     secondary = ColorF6EBE4,
     onSecondary = ColorE2CDC7,
     background = ColorFDFAF7,
     onBackground = Color171614,
-    inversePrimary = colorFFFFFF,
+    inversePrimary = ColorFFFFFF,
 )
 
 
 private val LightColorScheme = lightColorScheme(
-    primary = colorFFFFFF,
+    //topBar
+    primary = ColorFFFFFF,
     onPrimary = Color171614,
+    primaryContainer = ColorFFFFFF,
+    //bottom bar
     secondary = ColorF6EBE4,
-    onSecondary = ColorE2CDC7,
+    onSecondary = Color171614,
+    secondaryContainer = ColorE2CDC7,
+    //main
+    tertiary = ColorF6EBE4,
+    onTertiary = Color171614,
+    onTertiaryContainer = Color9A9999,
+    //組件、
+    surface = ColorFFFFFF,
+    onSurface = Color171614,
+    //多選
+    surfaceVariant = Color171614,
+    onSurfaceVariant = ColorF2F0ED,
     background = ColorFDFAF7,
     onBackground = Color171614,
-    inversePrimary = colorFFFFFF,
 )
 
 @Composable
@@ -46,9 +59,9 @@ fun HoliDemo2Theme(
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+            dynamicLightColorScheme(context)
         }
-        darkTheme -> DarkColorScheme
+        darkTheme -> LightColorScheme
         else -> LightColorScheme
     }
     val view = LocalView.current

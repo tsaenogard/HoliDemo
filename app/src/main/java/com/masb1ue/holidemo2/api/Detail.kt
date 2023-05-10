@@ -6,9 +6,9 @@ data class Detail(
     @SerializedName("content")
     val content: String,
     @SerializedName("cost")
-    val cost: Int,
+    val cost: String,
     @SerializedName("size")
     val size: String,
-    @SerializedName("remark")
-    val remark: String,
+    @SerializedName("style")
+    val style: String,
 )

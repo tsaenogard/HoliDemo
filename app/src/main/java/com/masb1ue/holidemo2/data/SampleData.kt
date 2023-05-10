@@ -43,14 +43,23 @@ object SampleData {
     val naviList = listOf(
         "首頁", "聯絡", "我的"
     )
+    val naviIconList = listOf(
+        R.drawable.icon_gift, R.drawable.icon_support, R.drawable.icon_user
+    )
     val naviRouteList = listOf(
         "home", "contact", "my"
     )
     val usageList = listOf(
-        "全部", "三節禮盒", "特殊節慶", "商品售賣", "紀念贈禮"
+        "節慶活動", "紀念贈禮", "商品售賣", "三節禮盒"
     )
-    val categoryList = listOf(
-        "食品", "酒類", "金融", "飯店", "精品", "其他"
+    val usageTitleList = listOf(
+        "全部", "節慶活動", "紀念贈禮", "商品售賣", "三節禮盒"
+    )
+    val industryList = listOf(
+        "食品製造", "酒類", "餐飲", "旅館飯店", "時尚精品"
+    )
+    val industryTitleList = listOf(
+        "全部", "食品製造", "酒類", "餐飲", "旅館飯店", "時尚精品"
     )
     val categoryImgList = listOf(
         R.drawable.food,
@@ -171,77 +180,77 @@ object SampleData {
         ),
     )
     val productList = listOf(
-        ProductTemp(
+        Product(
             id = 0,
+            priority = 1,
             subtitle = "美式外帶盒",
             name = "",
-            detail = "",
-            cost = 0,
+            content = "",
+            cost = "",
             size = "",
-            remark = "",
-            category1 = "",
-            category2 = "",
-            image = R.drawable.foodpackage01
+            style = "",
+            category = listOf(),
+            imageData = listOf(),
         ),
-        ProductTemp(
+        Product(
             id = 1,
+            priority = 1,
             subtitle = "印花袋裝",
             name = "",
-            detail = "",
-            cost = 0,
+            content = "",
+            cost = "",
             size = "",
-            remark = "",
-            category1 = "",
-            category2 = "",
-            image = R.drawable.foodpackage02
+            style = "",
+            category = listOf(),
+            imageData = listOf()
         ),
-        ProductTemp(
+        Product(
             id = 0,
+            priority = 1,
             subtitle = "長型盒裝",
             name = "",
-            detail = "",
-            cost = 0,
+            content = "",
+            cost = "",
             size = "",
-            remark = "",
-            category1 = "",
-            category2 = "",
-            image = R.drawable.foodpackage03
+            style = "",
+            category = listOf(),
+            imageData = listOf()
         ),
-        ProductTemp(
+        Product(
             id = 0,
+            priority = 1,
             subtitle = "透明包裝",
             name = "",
-            detail = "",
-            cost = 0,
+            content = "",
+            cost = "",
             size = "",
-            remark = "",
-            category1 = "",
-            category2 = "",
-            image = R.drawable.foodpackage04
+            style = "",
+            category = listOf(),
+            imageData = listOf()
         ),
-        ProductTemp(
+        Product(
             id = 0,
+            priority = 1,
             subtitle = "透明包裝",
             name = "",
-            detail = "",
-            cost = 0,
+            content = "",
+            cost = "",
             size = "",
-            remark = "",
-            category1 = "",
-            category2 = "",
-            image = R.drawable.foodpackage05
+            style = "",
+            category = listOf(),
+            imageData = listOf()
         ),
-        ProductTemp(
+        Product(
             id = 0,
+            priority = 1,
             subtitle = "透明包裝",
             name = "",
-            detail = "",
-            cost = 0,
+            content = "",
+            cost = "",
             size = "",
-            remark = "",
-            category1 = "",
-            category2 = "",
-            image = R.drawable.foodpackage06
+            style = "",
+            category = listOf(),
+            imageData = listOf()
         ),
     )
 
