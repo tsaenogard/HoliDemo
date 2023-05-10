@@ -19,6 +19,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
@@ -92,7 +93,7 @@ fun CategoryScreen(
                     columns = GridCells.Fixed(2),
                     modifier = Modifier
                         .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                    horizontalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
                     val products = productList.filter { product ->
                         product.category.any { it.content == usageList[pagerState.currentPage] }
@@ -113,8 +114,10 @@ fun CategoryScreen(
                                     .height(160.dp)
                                     .width(160.dp)
                             )
+                            Spacer(modifier = Modifier.height(16.dp))
                             Text(
                                 text = products[index].subtitle,
+                                fontSize = 14.sp,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis,
                                 modifier = Modifier.height(35.dp)

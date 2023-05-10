@@ -89,7 +89,8 @@ fun ContactScreen(modifier: Modifier) {
         ) {
             val context = LocalContext.current
             val intent =
-                remember { Intent(Intent.ACTION_VIEW, Uri.parse("https://line.me/ti/p/OjTeDF_lL5")) }
+                remember {
+                    Intent(Intent.ACTION_VIEW, Uri.parse("https://lin.ee/66ZtoWi")) }
             Button(
                 onClick = { context.startActivity(intent) },
                 modifier = Modifier

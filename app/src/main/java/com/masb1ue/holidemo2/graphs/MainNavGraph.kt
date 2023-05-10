@@ -13,7 +13,7 @@ import com.masb1ue.holidemo2.data.SampleData
 fun MainNavGraph(
     navController: NavHostController,
     modifier: Modifier,
-    viewModel: SearchViewModel
+    viewModel: SearchViewModel,
 ) {
     NavHost(
         navController = navController,
@@ -29,7 +29,10 @@ fun MainNavGraph(
                 navController.navigate(BottomBarNav.Category.route)
             }, {
                 navController.navigate(BottomBarNav.Product.route)
-            })
+            }, {
+                viewModel.isShowFilter = !viewModel.isShowFilter
+            }
+            )
         }
         composable(BottomBarNav.Category.route) {
             CategoryScreen(modifier,
@@ -58,31 +61,31 @@ sealed class BottomBarNav(
 ) {
     object Home : BottomBarNav(
         route = "HOME",
-        title = "HOME",
+        title = "首頁",
         icon = R.drawable.icon_gift
     )
 
     object Contact : BottomBarNav(
         route = "Contact",
-        title = "Contact",
+        title = "聯絡",
         icon = R.drawable.icon_support
     )
 
     object My : BottomBarNav(
         route = "My",
-        title = "My",
+        title = "關於",
         icon = R.drawable.icon_user
     )
 
     object Category : BottomBarNav(
         route = "Category",
-        title = "Category",
+        title = "作品集",
         icon = R.drawable.icon_user
     )
 
     object Product : BottomBarNav(
         route = "Product",
-        title = "Product",
+        title = "詳細頁",
         icon = R.drawable.icon_user
     )
 }

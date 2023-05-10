@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -18,6 +19,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -33,7 +35,8 @@ import java.util.*
 fun HomeScreen(
     modifier: Modifier,
     onCategoryClick: (String) -> Unit,
-    onDemoClick: (String) -> Unit
+    onDemoClick: (String) -> Unit,
+    onFilterClick: () -> Unit,
 ) {
     Column(
         modifier
@@ -42,37 +45,6 @@ fun HomeScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top,
     ) {
-        LazyRow(
-            Modifier
-                .fillMaxWidth()
-                .height(94.dp),
-            horizontalArrangement = Arrangement.spacedBy(18.dp)
-        ) {
-            items(SampleData.industryList.size) { index ->
-                Column(
-                    Modifier
-                        .fillMaxHeight()
-                        .clickable { onCategoryClick.invoke(SampleData.industryList[index]) },
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(6.dp)
-                ) {
-                    Image(
-                        painter = painterResource(id = SampleData.categoryImgList[index]),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .aspectRatio(1f)
-                            .clip(CircleShape)
-                            .weight(2f),
-                        contentScale = ContentScale.Crop
-                    )
-                    Text(
-                        text = SampleData.industryList[index],
-                        modifier = Modifier.weight(1f)
-                    )
-                }
-            }
-        }
-        Spacer(Modifier.height(16.dp))
         Column(
             Modifier
                 .fillMaxWidth()
@@ -109,7 +81,69 @@ fun HomeScreen(
                 )
             }
         }
+        Spacer(Modifier.height(16.dp))
+        LazyRow(
+            Modifier
+                .fillMaxWidth()
+                .height(94.dp),
+            horizontalArrangement = Arrangement.spacedBy(18.dp)
+        ) {
+            items(SampleData.industryList.size) { index ->
+                Column(
+                    Modifier
+                        .fillMaxHeight()
+                        .clickable { onCategoryClick.invoke(SampleData.industryList[index]) },
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(6.dp)
+                ) {
+                    Image(
+                        painter = painterResource(id = SampleData.categoryImgList[index]),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .aspectRatio(1f)
+                            .clip(CircleShape)
+                            .weight(2f),
+                        contentScale = ContentScale.Crop
+                    )
+                    Text(
+                        text = SampleData.industryList[index],
+                        modifier = Modifier.weight(1f),
+                        fontSize = 14.sp
+                    )
+                }
+            }
+        }
         Spacer(modifier = Modifier.height(16.dp))
+        Divider(thickness = 1.dp, color = Color(0xFFEAE6E5))
+        Box(modifier = Modifier.fillMaxWidth()) {
+            Text(
+                text = "精選作品",
+                fontSize = 16.sp,
+                fontWeight = FontWeight(600),
+                modifier = Modifier.align(Alignment.CenterStart)
+            )
+            Row(
+                modifier = Modifier
+                    .align(Alignment.CenterEnd)
+                    .clickable {
+                        onFilterClick()
+                    },
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "篩選", fontSize = 14.sp,
+                    fontWeight = FontWeight(400),
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.icon_menu),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(48.dp, 48.dp)
+                )
+            }
+
+        }
+        Divider(thickness = 1.dp, color = Color(0xFFEAE6E5))
         LazyVerticalGrid(
             columns = GridCells.Fixed(3),
             modifier = Modifier
@@ -147,6 +181,6 @@ fun HomeScreen(
 @Preview
 @Composable
 fun HomeScreenPreview() {
-    HomeScreen(Modifier, {}, {})
+    HomeScreen(Modifier, {}, {}, {})
 }
 

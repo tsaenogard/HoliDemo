@@ -8,7 +8,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -24,7 +23,7 @@ import com.masb1ue.holidemo2.graphs.MainNavGraph
 fun MainScreen(
     modifier: Modifier,
     navController: NavHostController = rememberNavController(),
-    viewModel: SearchViewModel
+    viewModel: SearchViewModel,
 ) {
     Scaffold(topBar = {
         CenterAlignedTopAppBar(
@@ -44,7 +43,7 @@ fun MainScreen(
         MainNavGraph(
             navController = navController,
             modifier = Modifier.padding(innerPadding),
-            viewModel = viewModel
+            viewModel = viewModel,
         )
     }
 //    Scaffold(

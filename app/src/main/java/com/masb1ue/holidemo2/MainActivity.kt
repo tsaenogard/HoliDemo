@@ -60,7 +60,7 @@ class MainActivity : ComponentActivity() {
                         )
                     }
                     val layerIndex = remember { mutableStateOf(0) }
-                    val isShowFilter = remember { mutableStateOf(true) }
+                    val isShowFilter = viewModel.isShowFilter
                     ModalNavigationDrawer(
                         drawerState = drawerState,
                         drawerContent = {

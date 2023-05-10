@@ -9,7 +9,10 @@ import com.masb1ue.holidemo2.MainScreen
 import com.masb1ue.holidemo2.api.SearchViewModel
 
 @Composable
-fun RootNavigationGraph(navController: NavHostController, viewModel: SearchViewModel) {
+fun RootNavigationGraph(
+    navController: NavHostController,
+    viewModel: SearchViewModel,
+) {
     NavHost(
         navController = navController,
         route = Graph.ROOT,
