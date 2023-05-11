@@ -11,4 +11,6 @@ data class Detail(
     val size: String,
     @SerializedName("style")
     val style: String,
+    @SerializedName("remark")
+    val remark: String,
 )

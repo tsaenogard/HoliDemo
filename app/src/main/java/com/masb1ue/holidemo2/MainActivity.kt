@@ -4,26 +4,17 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.masb1ue.holidemo2.api.SearchViewModel
 import com.masb1ue.holidemo2.data.Product
-import com.masb1ue.holidemo2.data.SampleData
 import com.masb1ue.holidemo2.graphs.RootNavigationGraph
 import com.masb1ue.holidemo2.ui.theme.HoliDemo2Theme
-import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
 
@@ -54,58 +45,61 @@ class MainActivity : ComponentActivity() {
                                 cost = "23",
                                 size = "large",
                                 style = "",
+                                remark = "",
                                 category = listOf(),
                                 imageData = listOf()
                             )
                         )
                     }
                     val layerIndex = remember { mutableStateOf(0) }
-                    val isShowFilter = viewModel.isShowFilter
-                    ModalNavigationDrawer(
-                        drawerState = drawerState,
-                        drawerContent = {
-                            ModalDrawerSheet(drawerShape = RoundedCornerShape(0.dp)) {
-                                DrawerScreen(
-                                    Modifier,
-                                    {
-                                        viewModel.setUsage("全部")
-                                        viewModel.setIndustry("全部")
-                                        viewModel.getProductList()
-                                        navController.navigate("category")
-                                        layerIndex.value = 1
-                                        scope.launch {
-                                            drawerState.close()
-                                        }
-                                    },
-                                    {
-                                        viewModel.getProductList()
-                                        navController.navigate("category")
-                                        layerIndex.value = 1
-                                        scope.launch {
-                                            drawerState.close()
-                                        }
-                                    },
-                                    {
-                                        viewModel.setUsage("全部")
-                                        viewModel.setIndustry("全部")
-                                    },
-                                    if (viewModel.industryList.size == SampleData.industryList.size) {
-                                        listOf("全部")
-                                    } else {
-                                        viewModel.industryList
-                                    },
-                                    if (viewModel.usageList.size == SampleData.usageList.size) {
-                                        listOf("全部")
-                                    } else {
-                                        viewModel.usageList
-                                    },
-                                    { viewModel.setIndustry(it) },
-                                    { viewModel.setUsage(it) }
-                                )
-                            }
-                        }
-                    ) {
-                        RootNavigationGraph(navController = navController, viewModel)
+                    val isShowFilter = remember {
+                        mutableStateOf(false)
+                    }
+//                    ModalNavigationDrawer(
+//                        drawerState = drawerState,
+//                        drawerContent = {
+//                            ModalDrawerSheet(drawerShape = RoundedCornerShape(0.dp)) {
+//                                DrawerScreen(
+//                                    Modifier,
+//                                    {
+//                                        viewModel.setUsage("全部")
+//                                        viewModel.setIndustry("全部")
+//                                        viewModel.getProductList()
+//                                        navController.navigate("category")
+//                                        layerIndex.value = 1
+//                                        scope.launch {
+//                                            drawerState.close()
+//                                        }
+//                                    },
+//                                    {
+//                                        viewModel.getProductList()
+//                                        navController.navigate("category")
+//                                        layerIndex.value = 1
+//                                        scope.launch {
+//                                            drawerState.close()
+//                                        }
+//                                    },
+//                                    {
+//                                        viewModel.setUsage("全部")
+//                                        viewModel.setIndustry("全部")
+//                                    },
+//                                    if (viewModel.industryList.size == SampleData.industryList.size) {
+//                                        listOf("全部")
+//                                    } else {
+//                                        viewModel.industryList
+//                                    },
+//                                    if (viewModel.usageList.size == SampleData.usageList.size) {
+//                                        listOf("全部")
+//                                    } else {
+//                                        viewModel.usageList
+//                                    },
+//                                    { viewModel.setIndustry(it) },
+//                                    { viewModel.setUsage(it) }
+//                                )
+//                            }
+//                        }
+//                    ) {
+                    RootNavigationGraph(navController = navController, viewModel)
 //                        Column(
 //                            modifier = Modifier
 //                                .fillMaxSize(),
@@ -234,7 +228,7 @@ class MainActivity : ComponentActivity() {
 //                                }
 //                            }
 //                        }
-                    }
+//                    }
                 }
             }
         }

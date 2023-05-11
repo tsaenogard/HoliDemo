@@ -36,7 +36,7 @@ fun HomeScreen(
     modifier: Modifier,
     onCategoryClick: (String) -> Unit,
     onDemoClick: (String) -> Unit,
-    onFilterClick: () -> Unit,
+    onFilterClick: (Boolean) -> Unit,
 ) {
     Column(
         modifier
@@ -126,7 +126,7 @@ fun HomeScreen(
                 modifier = Modifier
                     .align(Alignment.CenterEnd)
                     .clickable {
-                        onFilterClick()
+                        onFilterClick(true)
                     },
                 verticalAlignment = Alignment.CenterVertically
             ) {

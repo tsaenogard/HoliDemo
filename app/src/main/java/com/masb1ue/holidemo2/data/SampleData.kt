@@ -1,6 +1,8 @@
 package com.masb1ue.holidemo2.data
 
 import com.masb1ue.holidemo2.R
+import com.masb1ue.holidemo2.api.CategoryResponse
+import com.masb1ue.holidemo2.api.ImageData
 
 
 object SampleData {
@@ -189,6 +191,7 @@ object SampleData {
             cost = "",
             size = "",
             style = "",
+            remark = "",
             category = listOf(),
             imageData = listOf(),
         ),
@@ -201,6 +204,7 @@ object SampleData {
             cost = "",
             size = "",
             style = "",
+            remark = "",
             category = listOf(),
             imageData = listOf()
         ),
@@ -213,6 +217,7 @@ object SampleData {
             cost = "",
             size = "",
             style = "",
+            remark = "",
             category = listOf(),
             imageData = listOf()
         ),
@@ -225,6 +230,7 @@ object SampleData {
             cost = "",
             size = "",
             style = "",
+            remark = "",
             category = listOf(),
             imageData = listOf()
         ),
@@ -237,6 +243,7 @@ object SampleData {
             cost = "",
             size = "",
             style = "",
+            remark = "",
             category = listOf(),
             imageData = listOf()
         ),
@@ -249,9 +256,34 @@ object SampleData {
             cost = "",
             size = "",
             style = "",
+            remark = "",
             category = listOf(),
             imageData = listOf()
         ),
     )
 
+    val sampleProduct = Product(
+        id = 1,
+        priority = 1,
+        subtitle = "collehouse 大理石精品",
+        name = "璀璨之愛禮盒組",
+        content = "由高品質的白色大理石紋印製而成，展現出高貴優雅的氛圍，表達真摯感情的完美選擇",
+        cost = "單面盒型設計(單位/款)\n5,000-10,000元",
+        size = "長 x 寬 x 高(公釐mm)\n150 x 150 x 100",
+        style = "3 種款式材料\n白卡紙／雪銅紙／象牙紙",
+        remark = "1.訂購最低數量需300件，客製化歡迎來訊\n 2.以上報價僅為參考，費用會依包裝結構、材質、加工及複雜度影響單價，實際價錢以最終報價為主。\n誤差：±2mm為正常誤差值",
+        category = listOf(
+            CategoryResponse(0, "時尚精品"),
+            CategoryResponse(1, "節慶活動"),
+            CategoryResponse(1, "紀念贈禮"),
+        ),
+        imageData = listOf(
+            ImageData(
+                1,
+                "https://api.waproject-gift.store/api/v1/static/1_1683390992.png"
+            )
+        )
+    )
 }
+
+

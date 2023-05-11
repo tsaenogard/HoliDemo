@@ -12,6 +12,7 @@ data class Product(
     val cost: String,
     val size: String,
     val style: String,
+    val remark: String,
     val category: List<CategoryResponse>,
     val imageData: List<ImageData>,
 )

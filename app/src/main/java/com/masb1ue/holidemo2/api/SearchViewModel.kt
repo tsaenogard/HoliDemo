@@ -7,13 +7,14 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.masb1ue.holidemo2.data.SampleData
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SearchViewModel : ViewModel() {
     var productResponse: List<com.masb1ue.holidemo2.data.Product> by mutableStateOf(listOf())
     var errorMessage: String by mutableStateOf("")
-    var isLoading :Boolean by mutableStateOf(false)
-    var isShowFilter :Boolean by mutableStateOf(false)
+    var isLoading: Boolean by mutableStateOf(false)
+    var isShowFilter: Boolean by mutableStateOf(false)
     var industryList: List<String> by mutableStateOf(SampleData.industryList)
     var usageList: List<String> by mutableStateOf(SampleData.usageList)
 
@@ -36,9 +37,10 @@ class SearchViewModel : ViewModel() {
                         subtitle = it.subtitle,
                         name = it.name,
                         content = it.detail.content,
-                        cost = it.detail.cost,
-                        size = it.detail.size,
-                        style = it.detail.style,
+                        cost = it.detail.cost.replace("<br>", "\n"),
+                        size = it.detail.size.replace("<br>", "\n"),
+                        style = it.detail.style.replace("<br>", "\n"),
+                        remark = it.detail.remark.replace("<br>", "\n"),
                         category = it.category,
                         imageData = it.imageData
                     )

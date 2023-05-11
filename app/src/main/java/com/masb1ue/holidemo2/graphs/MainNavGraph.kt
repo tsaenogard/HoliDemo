@@ -1,6 +1,8 @@
 package com.masb1ue.holidemo2.graphs
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -14,7 +16,9 @@ fun MainNavGraph(
     navController: NavHostController,
     modifier: Modifier,
     viewModel: SearchViewModel,
+    onFilterClick: (Boolean) -> Unit
 ) {
+    val productItem = remember{ mutableStateOf(SampleData.sampleProduct) }
     NavHost(
         navController = navController,
         route = Graph.MAIN,
@@ -30,7 +34,7 @@ fun MainNavGraph(
             }, {
                 navController.navigate(BottomBarNav.Product.route)
             }, {
-                viewModel.isShowFilter = !viewModel.isShowFilter
+                onFilterClick(it)
             }
             )
         }
@@ -39,11 +43,12 @@ fun MainNavGraph(
                 isLoading = false,
                 productList = viewModel.productResponse,
                 onProductClick = { product ->
+                    productItem.value = product
                     navController.navigate(BottomBarNav.Product.route)
                 })
         }
         composable(BottomBarNav.Product.route) {
-            ProductScreen(modifier, SampleData.productList[0])
+            ProductScreen(modifier, productItem.value)
         }
         composable(BottomBarNav.Contact.route) {
             ContactScreen(modifier)

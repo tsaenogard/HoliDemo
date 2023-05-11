@@ -101,7 +101,7 @@ fun CategoryScreen(
                     items(products.size) { index ->
                         Column(
                             Modifier
-                                .clickable { onProductClick.invoke(productList[index]) },
+                                .clickable { onProductClick.invoke(products[index]) },
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Image(
