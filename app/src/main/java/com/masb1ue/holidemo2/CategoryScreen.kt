@@ -128,7 +128,7 @@ fun CategoryScreen(
             }
         } else {
             if (isLoading){
-                CircularProgressIndicator()
+                CircularProgressIndicator(color = MaterialTheme.colorScheme.onPrimary)
             }else {
                 Text(text = "沒有資料")
             }

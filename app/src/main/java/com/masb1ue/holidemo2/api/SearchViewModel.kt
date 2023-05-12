@@ -14,7 +14,6 @@ class SearchViewModel : ViewModel() {
     var productResponse: List<com.masb1ue.holidemo2.data.Product> by mutableStateOf(listOf())
     var errorMessage: String by mutableStateOf("")
     var isLoading: Boolean by mutableStateOf(false)
-    var isShowFilter: Boolean by mutableStateOf(false)
     var industryList: List<String> by mutableStateOf(SampleData.industryList)
     var usageList: List<String> by mutableStateOf(SampleData.usageList)
 

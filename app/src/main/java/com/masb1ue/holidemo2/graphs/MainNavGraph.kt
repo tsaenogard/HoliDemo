@@ -18,7 +18,7 @@ fun MainNavGraph(
     viewModel: SearchViewModel,
     onFilterClick: (Boolean) -> Unit
 ) {
-    val productItem = remember{ mutableStateOf(SampleData.sampleProduct) }
+    val productItem = remember { mutableStateOf(SampleData.sampleProduct) }
     NavHost(
         navController = navController,
         route = Graph.MAIN,
@@ -31,7 +31,8 @@ fun MainNavGraph(
                 viewModel.setIndustry(it)
                 viewModel.getProductList()
                 navController.navigate(BottomBarNav.Category.route)
-            }, {
+            }, { product ->
+                productItem.value = product
                 navController.navigate(BottomBarNav.Product.route)
             }, {
                 onFilterClick(it)
@@ -40,7 +41,7 @@ fun MainNavGraph(
         }
         composable(BottomBarNav.Category.route) {
             CategoryScreen(modifier,
-                isLoading = false,
+                isLoading = viewModel.isLoading,
                 productList = viewModel.productResponse,
                 onProductClick = { product ->
                     productItem.value = product

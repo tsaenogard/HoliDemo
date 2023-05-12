@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.sp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
+import com.masb1ue.holidemo2.data.Product
 import com.masb1ue.holidemo2.data.SampleData
 import kotlinx.coroutines.launch
 import java.util.*
@@ -35,7 +36,7 @@ import java.util.*
 fun HomeScreen(
     modifier: Modifier,
     onCategoryClick: (String) -> Unit,
-    onDemoClick: (String) -> Unit,
+    onDemoClick: (Product) -> Unit,
     onFilterClick: (Boolean) -> Unit,
 ) {
     Column(
@@ -158,18 +159,18 @@ fun HomeScreen(
                 Column(
                     Modifier
                         .background(Color(0xFFFFFFFF))
-                        .clickable { onDemoClick.invoke(SampleData.homeProductList[index].subtitle) },
+                        .clickable { onDemoClick.invoke(SampleData.homeProductList[index]) },
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Image(
-                        painter = painterResource(id = SampleData.homeProductList[index].image),
+                        painter = painterResource(id = SampleData.homeProductImageList[index]),
                         contentDescription = null,
                         contentScale = ContentScale.FillBounds,
                         modifier = Modifier
                             .aspectRatio(1f)
                     )
                     Text(
-                        text = SampleData.homeProductList[index].subtitle,
+                        text = SampleData.homeProductList[index].name,
                         fontSize = 14.sp,
                     )
                 }
