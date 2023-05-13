@@ -27,7 +27,7 @@ class SearchViewModel : ViewModel() {
                     Category(categoryID = 1, content = usageList)
                 )
                 val response = apiService.search(
-                    SearchRequest(condition = allList, page = 0, pageSize = 30)
+                    SearchRequest(condition = allList, page = 0, pageSize = 50)
                 )
                 productResponse = response.list.map {
                     com.masb1ue.holidemo2.data.Product(

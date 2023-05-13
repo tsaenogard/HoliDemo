@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -25,6 +26,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import com.masb1ue.holidemo2.data.Product
+import com.masb1ue.holidemo2.data.SampleData
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
@@ -32,6 +34,7 @@ import kotlinx.coroutines.launch
 fun CategoryScreen(
     modifier: Modifier,
     isLoading: Boolean,
+    categoryIndex: Int,
     productList: List<Product>,
     onProductClick: (Product) -> Unit
 ) {
@@ -49,7 +52,25 @@ fun CategoryScreen(
                 it.categoryID == 1
             }
         }.flatten().distinct().map { it.content }
+        Row(
+            Modifier
+                .height(60.dp)
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Image(
+                painter = painterResource(id = SampleData.categoryImgList[categoryIndex]),
+                contentDescription = null,
+                modifier = Modifier
+                    .aspectRatio(1f)
+                    .clip(CircleShape),
+                contentScale = ContentScale.FillWidth
+            )
+            Spacer(modifier = Modifier.width(16.dp))
+            Text(text = SampleData.industryTitleList[categoryIndex], fontSize = 24.sp)
+        }
         if (productList.isNotEmpty()) {
+            Spacer(modifier = Modifier.height(16.dp))
             TabRow(
                 selectedTabIndex = pagerState.currentPage,
                 indicator = { tabPositions ->
@@ -127,9 +148,9 @@ fun CategoryScreen(
                 }
             }
         } else {
-            if (isLoading){
+            if (isLoading) {
                 CircularProgressIndicator(color = MaterialTheme.colorScheme.onPrimary)
-            }else {
+            } else {
                 Text(text = "沒有資料")
             }
         }
@@ -139,7 +160,7 @@ fun CategoryScreen(
 @Preview
 @Composable
 fun CategoryScreenPreview() {
-    CategoryScreen(Modifier, false, listOf<Product>(), {})
+    CategoryScreen(Modifier, false, 0, listOf<Product>(), {})
 }
 
 

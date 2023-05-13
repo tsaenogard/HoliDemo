@@ -4,7 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -16,10 +15,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.masb1ue.holidemo2.api.SearchViewModel
-import com.masb1ue.holidemo2.data.SampleData
 import com.masb1ue.holidemo2.graphs.BottomBarNav
 import com.masb1ue.holidemo2.graphs.MainNavGraph
-import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -28,87 +25,85 @@ fun MainScreen(
     navController: NavHostController = rememberNavController(),
     viewModel: SearchViewModel,
 ) {
-    val drawerState = rememberDrawerState(DrawerValue.Closed)
-    val scope = rememberCoroutineScope()
-    ModalNavigationDrawer(drawerState = drawerState, drawerContent = {
-        ModalDrawerSheet(drawerShape = RoundedCornerShape(0.dp)) {
-            DrawerScreen(Modifier,
-                onBackClick = {
-                    viewModel.setUsage("全部")
-                    viewModel.setIndustry("全部")
-                    viewModel.getProductList()
-                    navController.navigate(BottomBarNav.Category.route)
-                    scope.launch {
-                        drawerState.close()
+//    val drawerState = rememberDrawerState(DrawerValue.Closed)
+//    val scope = rememberCoroutineScope()
+//    ModalNavigationDrawer(drawerState = drawerState, drawerContent = {
+//        ModalDrawerSheet(drawerShape = RoundedCornerShape(0.dp)) {
+//            DrawerScreen(Modifier,
+//                onBackClick = {
+//                    viewModel.setUsage("全部")
+//                    viewModel.setIndustry("全部")
+//                    viewModel.getProductList()
+//                    navController.navigate(BottomBarNav.Category.route)
+//                    scope.launch {
+//                        drawerState.close()
+//                    }
+//                }, onConfirmClick = {
+//                    viewModel.getProductList()
+//                    navController.navigate("category")
+//                    scope.launch {
+//                        drawerState.close()
+//                    }
+//                }, onResetClick = {
+//                    viewModel.setUsage("全部")
+//                    viewModel.setIndustry("全部")
+//                }, industry = if (viewModel.industryList.size == SampleData.industryList.size) {
+//                    listOf("全部")
+//                } else {
+//                    viewModel.industryList
+//                }, usage = if (viewModel.usageList.size == SampleData.usageList.size) {
+//                    listOf("全部")
+//                } else {
+//                    viewModel.usageList
+//                }, onIndustryCheck = {
+//                    viewModel.setIndustry(it)
+//                }, onUsageCheck = {
+//                    viewModel.setUsage(it)
+//                })
+//        }
+//    }) {
+    Scaffold(
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = {
+                    Image(
+                        painter = painterResource(id = R.drawable.logo),
+                        contentDescription = null,
+                        modifier = Modifier.height(28.dp)
+                    )
+                },
+                navigationIcon = {
+                    val navBackStackEntry by navController.currentBackStackEntryAsState()
+                    when (navBackStackEntry?.destination?.route) {
+                        BottomBarNav.Category.route,
+                        BottomBarNav.Product.route ->
+                            IconButton(onClick = {
+                                navController.popBackStack()
+                            }) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.icon_left),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .size(48.dp, 48.dp)
+                                )
+                            }
+                        else -> IconButton(onClick = {}) {}
                     }
-                }, onConfirmClick = {
-                    viewModel.getProductList()
-                    navController.navigate("category")
-                    scope.launch {
-                        drawerState.close()
-                    }
-                }, onResetClick = {
-                    viewModel.setUsage("全部")
-                    viewModel.setIndustry("全部")
-                }, industry = if (viewModel.industryList.size == SampleData.industryList.size) {
-                    listOf("全部")
-                } else {
-                    viewModel.industryList
-                }, usage = if (viewModel.usageList.size == SampleData.usageList.size) {
-                    listOf("全部")
-                } else {
-                    viewModel.usageList
-                }, onIndustryCheck = {
-                    viewModel.setIndustry(it)
-                }, onUsageCheck = {
-                    viewModel.setUsage(it)
-                })
-        }
-    }) {
-        Scaffold(
-            topBar = {
-                CenterAlignedTopAppBar(
-                    title = {
-                        Image(
-                            painter = painterResource(id = R.drawable.logo),
-                            contentDescription = null,
-                            modifier = Modifier.height(28.dp)
-                        )
-                    },
-                    navigationIcon = {
-                        val navBackStackEntry by navController.currentBackStackEntryAsState()
-                        when(navBackStackEntry?.destination?.route){
-                            BottomBarNav.Category.route,
-                                BottomBarNav.Product.route ->
-                                IconButton(onClick = {
-                                    navController.popBackStack()
-                                }) {
-                                    Image(
-                                        painter = painterResource(id = R.drawable.icon_left),
-                                        contentDescription = null,
-                                        modifier = Modifier
-                                            .size(48.dp, 48.dp)
-                                    )
-                                }
-                                else -> IconButton(onClick = {}){}
-                        }
-                    },
-                )
-            },
-            bottomBar = {
-                BottomBar(navController = navController)
-            },
-        ) { innerPadding ->
-            MainNavGraph(navController = navController,
-                modifier = Modifier.padding(innerPadding),
-                viewModel = viewModel,
-                onFilterClick = {
-                    if (drawerState.isClosed) {
-                        scope.launch { drawerState.open() }
-                    }
-                })
-        }
+                },
+            )
+        },
+        bottomBar = {
+            BottomBar(navController = navController)
+        },
+    ) { innerPadding ->
+        MainNavGraph(navController = navController,
+            modifier = Modifier.padding(innerPadding),
+            viewModel = viewModel,
+            onFilterClick = {
+                navController.navigate(BottomBarNav.Filter.route)
+            })
     }
+//    }
 //    Scaffold(
 //        topBar = {
 //            CenterAlignedTopAppBar(

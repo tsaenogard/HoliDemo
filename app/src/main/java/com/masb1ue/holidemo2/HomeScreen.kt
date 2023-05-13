@@ -1,8 +1,6 @@
 package com.masb1ue.holidemo2
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -42,7 +40,8 @@ fun HomeScreen(
     Column(
         modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(16.dp)
+            .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top,
     ) {
@@ -89,11 +88,11 @@ fun HomeScreen(
                 .height(94.dp),
             horizontalArrangement = Arrangement.spacedBy(18.dp)
         ) {
-            items(SampleData.industryList.size) { index ->
+            items(SampleData.industryTitleList.size) { index ->
                 Column(
                     Modifier
                         .fillMaxHeight()
-                        .clickable { onCategoryClick.invoke(SampleData.industryList[index]) },
+                        .clickable { onCategoryClick.invoke(SampleData.industryTitleList[index]) },
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
@@ -107,7 +106,7 @@ fun HomeScreen(
                         contentScale = ContentScale.Crop
                     )
                     Text(
-                        text = SampleData.industryList[index],
+                        text = SampleData.industryTitleList[index],
                         modifier = Modifier.weight(1f),
                         fontSize = 14.sp
                     )
@@ -145,11 +144,12 @@ fun HomeScreen(
 
         }
         Divider(thickness = 1.dp, color = Color(0xFFEAE6E5))
+        Spacer(modifier = Modifier.height(16.dp))
         LazyVerticalGrid(
             columns = GridCells.Fixed(3),
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(1.0f),
+                .height(430.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalArrangement = Arrangement.spacedBy(
                 16.dp

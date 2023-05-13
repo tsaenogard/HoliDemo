@@ -19,6 +19,7 @@ fun MainNavGraph(
     onFilterClick: (Boolean) -> Unit
 ) {
     val productItem = remember { mutableStateOf(SampleData.sampleProduct) }
+    val categoryIndex = remember { mutableStateOf(0) }
     NavHost(
         navController = navController,
         route = Graph.MAIN,
@@ -29,6 +30,7 @@ fun MainNavGraph(
                 viewModel.setIndustry("全部")
                 viewModel.setUsage("全部")
                 viewModel.setIndustry(it)
+                categoryIndex.value = SampleData.industryTitleList.indexOf(it)
                 viewModel.getProductList()
                 navController.navigate(BottomBarNav.Category.route)
             }, { product ->
@@ -42,6 +44,7 @@ fun MainNavGraph(
         composable(BottomBarNav.Category.route) {
             CategoryScreen(modifier,
                 isLoading = viewModel.isLoading,
+                categoryIndex = categoryIndex.value,
                 productList = viewModel.productResponse,
                 onProductClick = { product ->
                     productItem.value = product
@@ -56,6 +59,49 @@ fun MainNavGraph(
         }
         composable(BottomBarNav.My.route) {
             MyScreen(modifier)
+        }
+        composable(BottomBarNav.Filter.route) {
+            DrawerScreen(modifier,
+                onBackClick = {
+                    viewModel.setUsage("全部")
+                    viewModel.setIndustry("全部")
+                    navController.navigate(BottomBarNav.Home.route)
+                }, onConfirmClick = {
+                    viewModel.getProductList()
+                    navController.navigate(BottomBarNav.FilterResult.route)
+                }, onResetClick = {
+                    viewModel.setUsage("全部")
+                    viewModel.setIndustry("全部")
+                }, industry = if (viewModel.industryList.size == SampleData.industryList.size) {
+                    listOf("全部")
+                } else {
+                    viewModel.industryList
+                }, usage = if (viewModel.usageList.size == SampleData.usageList.size) {
+                    listOf("全部")
+                } else {
+                    viewModel.usageList
+                }, onIndustryCheck = {
+                    viewModel.setIndustry(it)
+                }, onUsageCheck = {
+                    viewModel.setUsage(it)
+                })
+        }
+        composable(BottomBarNav.FilterResult.route) {
+            FilterResult(
+                modifier = modifier,
+                viewModel = viewModel,
+                onBackClick = { navController.navigate(BottomBarNav.Home.route) },
+                onResetClick = {
+                    viewModel.setUsage("全部")
+                    viewModel.setIndustry("全部")
+                    navController.navigate(BottomBarNav.Filter.route)
+                },
+                productList = viewModel.productResponse,
+                onProductClick = { product ->
+                    productItem.value = product
+                    navController.navigate(BottomBarNav.Product.route)
+                }
+            )
         }
     }
 }
@@ -92,6 +138,18 @@ sealed class BottomBarNav(
     object Product : BottomBarNav(
         route = "Product",
         title = "詳細頁",
+        icon = R.drawable.icon_user
+    )
+
+    object Filter : BottomBarNav(
+        route = "Filter",
+        title = "篩選頁",
+        icon = R.drawable.icon_user
+    )
+
+    object FilterResult : BottomBarNav(
+        route = "FilterResult",
+        title = "篩選結果頁",
         icon = R.drawable.icon_user
     )
 }
