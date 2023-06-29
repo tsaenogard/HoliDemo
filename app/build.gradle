@@ -11,8 +11,8 @@ android {
         applicationId "com.masb1ue.holidemo2"
         minSdk 21
         targetSdk 33
-        versionCode 4
-        versionName "1.7"
+        versionCode 5
+        versionName "1.9"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -70,4 +70,8 @@ dependencies {
 
     // coil
     implementation "io.coil-kt:coil-compose:2.3.0"
+
+    //lottie
+    def lottieVersion = "6.0.0"
+    implementation "com.airbnb.android:lottie-compose:$lottieVersion"
 }

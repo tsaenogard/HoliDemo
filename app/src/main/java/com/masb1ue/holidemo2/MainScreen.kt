@@ -66,26 +66,40 @@ fun MainScreen(
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    Image(
-                        painter = painterResource(id = R.drawable.logo),
-                        contentDescription = null,
-                        modifier = Modifier.height(28.dp)
-                    )
+                    val navBackStackEntry by navController.currentBackStackEntryAsState()
+                    when (navBackStackEntry?.destination?.route) {
+                        BottomBarNav.Category.route,
+                        BottomBarNav.Product.route,
+                        BottomBarNav.Home.route ->
+                            Image(
+                                painter = painterResource(id = R.drawable.logo),
+                                contentDescription = null,
+                                modifier = Modifier.height(28.dp)
+                            )
+                        else -> {}
+                    }
+
                 },
                 navigationIcon = {
                     val navBackStackEntry by navController.currentBackStackEntryAsState()
                     when (navBackStackEntry?.destination?.route) {
                         BottomBarNav.Category.route,
-                        BottomBarNav.Product.route ->
-                            IconButton(onClick = {
-                                navController.popBackStack()
-                            }) {
-                                Image(
-                                    painter = painterResource(id = R.drawable.icon_left),
-                                    contentDescription = null,
-                                    modifier = Modifier
-                                        .size(48.dp, 48.dp)
-                                )
+                        BottomBarNav.Product.route,
+                        BottomBarNav.Filter.route,
+                        BottomBarNav.FilterResult.route ->
+                            if(!viewModel.isLoading) {
+                                IconButton(onClick = {
+                                    navController.popBackStack()
+                                }) {
+                                    Image(
+                                        painter = painterResource(id = R.drawable.icon_left),
+                                        contentDescription = null,
+                                        modifier = Modifier
+                                            .size(48.dp, 48.dp)
+                                    )
+                                }
+                            }else {
+                                IconButton(onClick = {}) {}
                             }
                         else -> IconButton(onClick = {}) {}
                     }

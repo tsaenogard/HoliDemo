@@ -137,7 +137,7 @@ fun CategoryScreen(
                             )
                             Spacer(modifier = Modifier.height(16.dp))
                             Text(
-                                text = products[index].subtitle,
+                                text = products[index].name,
                                 fontSize = 14.sp,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis,
