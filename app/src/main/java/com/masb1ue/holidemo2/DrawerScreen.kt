@@ -39,25 +39,6 @@ fun DrawerScreen(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
-//        Row(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .height(64.dp)
-//                .background(MaterialTheme.colorScheme.primary),
-//            verticalAlignment = Alignment.CenterVertically
-//        ) {
-//            Image(
-//                painter = painterResource(id = R.drawable.icon_left),
-//                contentDescription = null,
-//                contentScale = ContentScale.FillHeight,
-//                modifier = Modifier
-//                    .fillMaxHeight()
-//                    .clickable {
-//                        onBackClick()
-//                    }
-//            )
-//        }
-//        Spacer(Modifier.height(20.dp))
         Row(
             Modifier
                 .fillMaxWidth()

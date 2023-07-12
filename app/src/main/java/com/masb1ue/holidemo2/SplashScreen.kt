@@ -23,20 +23,9 @@ fun SplashScreen(modifier: Modifier, onFinishSplash: () -> Unit) {
     LottieAnimation(
         composition = composition,
         iterations = LottieConstants.IterateForever,
-        contentScale = ContentScale.FillBounds,
+        contentScale = ContentScale.FillWidth,
         modifier = modifier.fillMaxSize()
     )
-//    Box(
-//        modifier = modifier
-//            .fillMaxSize()
-//            .background(MaterialTheme.colorScheme.secondary)
-//    ) {
-//        Image(
-//            painter = painterResource(id = R.drawable.logo),
-//            contentDescription = null,
-//            modifier = Modifier.align(Alignment.Center)
-//        )
-//    }
 }
 
 @Preview

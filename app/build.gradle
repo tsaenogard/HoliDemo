@@ -11,8 +11,8 @@ android {
         applicationId "com.masb1ue.holidemo2"
         minSdk 21
         targetSdk 33
-        versionCode 5
-        versionName "1.9"
+        versionCode 8
+        versionName "1.12"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

@@ -25,43 +25,6 @@ fun MainScreen(
     navController: NavHostController = rememberNavController(),
     viewModel: SearchViewModel,
 ) {
-//    val drawerState = rememberDrawerState(DrawerValue.Closed)
-//    val scope = rememberCoroutineScope()
-//    ModalNavigationDrawer(drawerState = drawerState, drawerContent = {
-//        ModalDrawerSheet(drawerShape = RoundedCornerShape(0.dp)) {
-//            DrawerScreen(Modifier,
-//                onBackClick = {
-//                    viewModel.setUsage("全部")
-//                    viewModel.setIndustry("全部")
-//                    viewModel.getProductList()
-//                    navController.navigate(BottomBarNav.Category.route)
-//                    scope.launch {
-//                        drawerState.close()
-//                    }
-//                }, onConfirmClick = {
-//                    viewModel.getProductList()
-//                    navController.navigate("category")
-//                    scope.launch {
-//                        drawerState.close()
-//                    }
-//                }, onResetClick = {
-//                    viewModel.setUsage("全部")
-//                    viewModel.setIndustry("全部")
-//                }, industry = if (viewModel.industryList.size == SampleData.industryList.size) {
-//                    listOf("全部")
-//                } else {
-//                    viewModel.industryList
-//                }, usage = if (viewModel.usageList.size == SampleData.usageList.size) {
-//                    listOf("全部")
-//                } else {
-//                    viewModel.usageList
-//                }, onIndustryCheck = {
-//                    viewModel.setIndustry(it)
-//                }, onUsageCheck = {
-//                    viewModel.setUsage(it)
-//                })
-//        }
-//    }) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -87,7 +50,7 @@ fun MainScreen(
                         BottomBarNav.Product.route,
                         BottomBarNav.Filter.route,
                         BottomBarNav.FilterResult.route ->
-                            if(!viewModel.isLoading) {
+                            if (!viewModel.isLoading) {
                                 IconButton(onClick = {
                                     navController.popBackStack()
                                 }) {
@@ -98,7 +61,7 @@ fun MainScreen(
                                             .size(48.dp, 48.dp)
                                     )
                                 }
-                            }else {
+                            } else {
                                 IconButton(onClick = {}) {}
                             }
                         else -> IconButton(onClick = {}) {}
@@ -117,129 +80,6 @@ fun MainScreen(
                 navController.navigate(BottomBarNav.Filter.route)
             })
     }
-//    }
-//    Scaffold(
-//        topBar = {
-//            CenterAlignedTopAppBar(
-//                title = {
-//                    Image(
-//                        painter = painterResource(id = R.drawable.logo),
-//                        contentDescription = null,
-//                        modifier = Modifier.height(28.dp)
-//                    )
-//                },
-//                navigationIcon = {
-//                    if (layerIndex.value != 0) {
-//                        IconButton(onClick = {
-//                            navController.popBackStack()
-//                            layerIndex.value -= 1
-//                        }) {
-//                            Image(
-//                                painter = painterResource(id = R.drawable.icon_left),
-//                                contentDescription = null,
-//                                modifier = Modifier
-//                                    .size(48.dp, 48.dp)
-//                            )
-//                        }
-//                    }
-//                },
-//                actions = {
-//                    if (isShowFilter.value) {
-//                        IconButton(onClick = { scope.launch { drawerState.open() } }) {
-////
-//                            Image(
-//                                painter = painterResource(id = R.drawable.icon_menu),
-//                                contentDescription = null,
-//                                modifier = Modifier.size(48.dp, 48.dp)
-//                            )
-//                        }
-//                    }
-//                },
-//            )
-//        },
-//        bottomBar = {
-//            var selectedItem by remember { mutableStateOf(0) }
-//            NavigationBar(
-//                containerColor = MaterialTheme.colorScheme.secondary
-//            ) {
-//                SampleData.naviList.forEachIndexed { index, item ->
-//                    NavigationBarItem(
-//                        icon = {
-//                            Image(
-//                                painter = painterResource(id = SampleData.naviIconList[index]),
-//                                contentDescription = null,
-//                                modifier = Modifier.size(24.dp)
-//                            )
-//                        },
-//                        label = {
-//                            Text(
-//                                item,
-//                                style = MaterialTheme.typography.bodySmall,
-//                                color = MaterialTheme.colorScheme.onSecondary
-//                            )
-//                        },
-//                        selected = selectedItem == index,
-//                        onClick = {
-//                            isShowFilter.value = index == 0
-//                            selectedItem = index
-//                            layerIndex.value = 0
-//                            navController.navigate(SampleData.naviRouteList[index])
-//                        },
-//                    )
-//                }
-//            }
-//        }
-//    ) { innerPadding ->
-//        NavHost(
-//            navController = navController,
-//            startDestination = "home",
-//        ) {
-//            composable("home") {
-//                HomeScreen(
-//                    modifier = Modifier.padding(innerPadding),
-//                    onCategoryClick = {
-//                        categoryTitle.value = it
-//                        layerIndex.value = 1
-//                        viewModel.setIndustry("全部")
-//                        viewModel.setUsage("全部")
-//                        viewModel.setIndustry(it)
-//                        viewModel.getProductList()
-//                        navController.navigate("category")
-//                    },
-//                    onDemoClick = {
-//                        layerIndex.value = 2
-//                        navController.navigate("product")
-//                    })
-//            }
-//            composable("category") {
-//                CategoryScreen(
-//                    modifier = Modifier.padding(innerPadding),
-//                    viewModel.isLoading,
-//                    productList = viewModel.productResponse,
-//                    onProductClick = { product ->
-//                        productTitle.value = product
-//                        layerIndex.value = 2
-//                        navController.navigate("product")
-//                    })
-//            }
-//            composable("product") {
-//                ProductScreen(
-//                    modifier = Modifier.padding(innerPadding),
-//                    productTitle.value
-//                )
-//            }
-//            composable("contact") {
-//                ContactScreen(
-//                    modifier = Modifier.padding(innerPadding),
-//                )
-//            }
-//            composable("my") {
-//                MyScreen(
-//                    modifier = Modifier.padding(innerPadding),
-//                )
-//            }
-//        }
-//    }
 }
 
 @Composable
@@ -254,7 +94,7 @@ fun BottomBar(navController: NavHostController) {
     val bottomBarDestination = screens.any { it.route == currentDestination?.route }
     if (bottomBarDestination) {
         NavigationBar(
-            containerColor = MaterialTheme.colorScheme.secondary
+            containerColor = MaterialTheme.colorScheme.secondary,
         ) {
             screens.forEach { screen ->
                 NavigationBarItem(

@@ -58,8 +58,9 @@ fun HoliDemo2Theme(
 ) {
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            dynamicLightColorScheme(context)
+//            val context = LocalContext.current
+//            dynamicLightColorScheme(context)
+            LightColorScheme
         }
         darkTheme -> LightColorScheme
         else -> LightColorScheme
@@ -67,7 +68,7 @@ fun HoliDemo2Theme(
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
-            (view.context as Activity).window.statusBarColor = colorScheme.primary.toArgb()
+            (view.context as Activity).window.statusBarColor = LightColorScheme.primary.toArgb()
             ViewCompat.getWindowInsetsController(view)?.isAppearanceLightStatusBars = darkTheme
         }
     }
